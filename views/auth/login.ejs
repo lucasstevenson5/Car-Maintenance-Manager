@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Log In</h1><br><br>
+
+        <form action="/auth/login" method="POST">
+            Username: <input type="text" name="username" placeholder="Username" /><br>
+            Password: <input type="password" name="password" placeholder="Password" /><br><br>
+            <input type="submit" name="" value="Login" />
+        </form>
+        <% if (error) { %>
+            <h3>Invalid credentials</h3>
+        <% } %>
+        </br><h3><a href="/">Return to Welcome Page</a></h3>
+    </body>
+</html>

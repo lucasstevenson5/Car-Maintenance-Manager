@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1><div>Welcome <%= users.name %></div></h1><br><br>
+
+        <form action="/users/profile?_method=PUT" method="POST">
+            Name: <input class="input" type="text" name="name" value="<%= users.name %>" /><br>
+            Username: <input class="input" type="text" name="username" value="<%= users.username %>"/><br>
+            Password: <input class="input" type="password" name="password" value="<%= users.password %>"/><br><br>
+            <input type="submit" value="Click to Edit Profile"><br><br><br><br>
+        </form>
+
+    </body>
+</html>

@@ -4,15 +4,15 @@ const methodOverride = require('method-override'); //gets method-override librar
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
 
-// const routes = require('./routes');
+const routes = require('./routes');
 
 const app = express(); //app is an object for the app
 
 //whatever inside this every request passed through it
 //makes it so express can understand it 
 //Middleware
-// app.use(express.urlencoded({extended: true})); //changes response from client to JS understandable 
-// app.use(methodOverride('_method'));
+app.use(express.urlencoded({extended: true})); //changes response from client to JS understandable 
+app.use(methodOverride('_method'));
 
 app.use(express.static('public'));
 
@@ -35,8 +35,8 @@ const verifyToken = (req,res, next) => {
 
 //app.use('/fruits', routes.fruits);
 // app.use('/users', routes.users);
-// app.use('/auth', routes.auth);
-// app.use('/users', verifyToken, routes.users);
+app.use('/auth', routes.auth);
+app.use('/users', verifyToken, routes.users);
 // app.use('/rosters', verifyToken, routes.rosters)
 
 app.get('/', (req, res) => {
