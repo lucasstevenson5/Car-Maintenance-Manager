@@ -9,11 +9,15 @@
         <h1><div>Welcome <%= users.name %></div></h1><br><br>
 
         <form action="/users/profile?_method=PUT" method="POST">
-            Name: <input class="input" type="text" name="name" value="<%= users.name %>" /><br>
-            Username: <input class="input" type="text" name="username" value="<%= users.username %>"/><br>
-            Password: <input class="input" type="password" name="password" value="<%= users.password %>"/><br><br>
+            Name: <input type="text" name="name" value="<%= users.name %>" /><br>
+            Username: <input type="text" name="username" value="<%= users.username %>"/><br>
+            Password: <input type="password" name="password" value="<%= users.password %>"/><br><br>
             <input type="submit" value="Click to Edit Profile"><br><br><br><br>
         </form>
 
+        <form action="/users/profile?_method=DELETE" method="POST">
+            <input type="submit" value="Delete Your Profile" />
+        </form>
+        
     </body>
 </html>
