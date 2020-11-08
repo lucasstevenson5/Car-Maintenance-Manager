@@ -4,7 +4,10 @@ const router = express.Router();
 
 
 
-router.get('/:index', ctrl.car.showCar);
+router.get('/new', ctrl.maintenanceItem.newMaintenanceItem)
+router.get('/:index', ctrl.maintenanceItem.showMaintenanceItem);
+router.put('/:index', ctrl.maintenanceItem.editMaintenanceItem);
+router.post('/new', ctrl.maintenanceItem.postMaintenanceItem)
 
 
 

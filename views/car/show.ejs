@@ -18,8 +18,20 @@
             Model: <input type="text" name="model" value="<%= car.model %>" />
             Image: <input type="text" name="image" value="<%= car.image %>" />
             <input type="submit" value="Update Car Attributes">
-        </form>
-    </body>
+        </form><br><br><br><br>
 
-    <a href="/users/profile">Back to Profile</a>
+        <a href="/maintenance/new">Add a Maintenance Item</a>
+
+        <% for (let i=0; i < car.MaintenanceItems.length; i++) { %>
+            <li>
+                <a href="/maintenance/<%= car.MaintenanceItems[i].id %>">
+                    <%= car.MaintenanceItems[i].itemDescription %>
+                </a>
+                <p>Car Mileage: <%= car.MaintenanceItems[i].carMiles %></p>
+                <p>Notes: <%= car.MaintenanceItems[i].notes %></p>
+            </li>
+        <% } %>
+
+        <br><br><br><br><a href="/users/profile">Back to Profile</a>
+    </body>
 </html>

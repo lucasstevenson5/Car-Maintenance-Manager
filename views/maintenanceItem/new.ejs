@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Add New Maintenance Item</h1>
+        <form action="/maintenance/new" method="POST">
+            <label for="car">Which Car:</label>
+            <select name="carId">
+                <% for (let i=0; i < car.length; i++) { %>
+                    <option value=<%= car[i].id %>><%= car[i].year %> <%= car[i].make %> <%= car[i].model %></option>
+                <% } %>
+            </select><br><br>
+            Item Description: <input type="text" name="itemDescription"  />
+            Car Mileage: <input type="text" name="carMiles"  />
+            Notes: <input type="text" name="notes" />
+            <input type="submit" value="Add New Maintenance Item">
+        </form><br><br><br><br>
+
+        <br><br><br><br><a href="/users/profile">Back to Profile</a>
+    </body>
+</html>
