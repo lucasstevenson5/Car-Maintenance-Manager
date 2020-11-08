@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            img { width: 200px }
+        </style>
+    </head>
+    <body>
+        <h1>Car Description</h1>
+        <p><%= car.year %> <%= car.make %> <%= car.model %></p>
+        <img src="<%= car.image %>" alt="picture of your car"/>
+        <form action="/car/<%= car.id %>?_method=PUT" method="POST">
+            Year: <input type="text" name="year" value="<%= car.year %>" />
+            Make: <input type="text" name="make" value="<%= car.make %>" />
+            Model: <input type="text" name="model" value="<%= car.model %>" />
+            Image: <input type="text" name="image" value="<%= car.image %>" />
+            <input type="submit" value="Update Car Attributes">
+        </form>
+    </body>
+
+    <a href="/users/profile">Back to Profile</a>
+</html>

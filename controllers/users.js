@@ -1,11 +1,15 @@
 const User = require('../models').Users;
-
+const Car = require('../models').Car;
 
 
 const rendProfile = (req, res) => {
-    User.findByPk(req.user.id)
+    User.findByPk(req.user.id, {
+        include: [{
+            model: Car,
+        }]
+    })
     .then(showProfile => {
-        console.log(showProfile)
+        console.log(showProfile.Cars[0])
         res.render('users/profile.ejs', {
             users: showProfile
         })

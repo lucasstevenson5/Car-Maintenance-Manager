@@ -37,7 +37,7 @@ const verifyToken = (req,res, next) => {
 // app.use('/users', routes.users);
 app.use('/auth', routes.auth);
 app.use('/users', verifyToken, routes.users);
-// app.use('/rosters', verifyToken, routes.rosters)
+app.use('/car', verifyToken, routes.car)
 
 app.get('/', (req, res) => {
     res.render('users/home.ejs')

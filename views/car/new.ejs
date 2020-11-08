@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <h1>Add New Car</h1>
+        <form action="/car/new" method="POST">
+            Year: <input type="text" name="year" />
+            Make: <input type="text" name="make" />
+            Model: <input type="text" name="model" />
+            Image: <input type="text" name="image" />
+            <input type="hidden" name="userId" value="<%= users.id %>" />
+            <input type="submit" value="Add New Car">
+        </form>
+    </body>
+
+    <a href="/users/profile">Back to Profile</a>
+</html>
