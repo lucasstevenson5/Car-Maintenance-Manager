@@ -1,10 +1,15 @@
 const Car = require('../models').Car;
 const User = require('../models').Users;
+const MaintenanceItem = require('../models').MaintenanceItem;
 
 const showCar = (req, res) => {
-    Car.findByPk(req.params.index)
+    Car.findByPk(req.params.index, {
+        include: [{
+            model: MaintenanceItem,
+        }]
+    })
     .then(carShow => {
-        console.log(carShow)
+        console.log(carShow.MaintenanceItems[0].carMiles)
         res.render('car/show.ejs', {
             car: carShow
         })
