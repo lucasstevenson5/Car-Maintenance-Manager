@@ -1,26 +1,123 @@
-import React from 'react';
-import './App.css';
+import React, { Component } from 'react';
+import Header from './components/Home/Header';
+import Homepage from './components/Home/Homepage';
+import Login from './components/Login-Signup/Login';
+import Signup from './components/Login-Signup/Signup';
+import Profile from './components/Profile/Profile';
 
-function App() {
-  return (
-    <div className="App" >
-    <div className="w-full max-w-md bg-gray-800" >
-      <form action="" className=" bg-white shadow-md rounded px-8 py-8 pt-8">
-        <div className="px-4 pb-4">
-          <label htmlFor="email" className="text-sm block font-bold  pb-2">EMAIL ADDRESS</label>
-          <input type="email" name="email" id="" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300 " placeholder="Johnbull@example.com"/>
-        </div>
-        <div  className="px-4 pb-4">
-          <label htmlFor="password" className="text-sm block font-bold pb-2">PASSWORD</label>
-          <input type="password" name="email" id="" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline border-blue-300" placeholder="Enter your password"/>
-        </div>
-        <div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Sign In</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  );
+import { Route, withRouter } from 'react-router-dom'
+
+class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      users: [{
+        name: "Random User",
+        username: "username",
+        password: "password"
+      }],
+      loggedIn: false,
+      error: "",
+      loggedInUser: {}
+    }
+  }
+
+  handleSignup = (e, userInfo) => {
+    e.preventDefault();
+    const users = this.state.users;
+    const loggedInUser = userInfo
+    delete userInfo.passwordConfirm;
+    delete userInfo.error;
+    
+    users.push(userInfo)
+
+    this.setState({
+      users: users,
+      loggedInUser: loggedInUser,
+      loggedIn: true
+    })
+    this.props.history.push('/profile')
+  }
+
+  handleLogin = (e, userInfo) => {
+    e.preventDefault();
+    const users = this.state.users;
+    const filteredUser = users.filter(
+      user => {
+        return user.username === userInfo.username && user.password === userInfo.password
+      }
+    )
+    if(filteredUser.length > 0) {
+      this.setState({
+        loggedIn: true,
+        loggedInUser: filteredUser[0]
+      })
+      this.props.history.push('/profile')
+    } else {
+      this.setState({
+        error: "Incorrect Credentials"
+      })
+    }
+  }
+
+  handleEditProfile = (e, userInfo) => {
+    e.preventDefault();
+    const users = this.state.users;
+    let loggedInUser = this.state.loggedInUser;
+    for(let i = 0; i < users.length; i++) {
+      if(users[i].username === loggedInUser.username && users[i].password === loggedInUser.password) {
+        users[i] = userInfo
+        loggedInUser = userInfo
+      }
+    }
+    this.setState({
+      users: users,
+      loggedInUser: loggedInUser
+    })
+    this.props.history.push('/profile')
+  }
+
+  render() {
+    console.log(this.state)
+    return (
+      <div className="App" >
+        <Header />
+        <main>
+          <Route exact path="/"
+            render={ (props) => {
+              return <Homepage />
+            }} 
+          />
+          <Route path="/login"
+            render={ (props) => {
+              return  <Login 
+                        handleLogin={this.handleLogin}
+                        {...this.state}
+                      />
+            }} 
+          />
+          <Route path="/signup"
+            render={ (props) => {
+              return  <Signup
+                        handleSignup={this.handleSignup}
+                        {...this.state}
+                      />
+            }} 
+          />
+          <Route path="/profile"
+            render={ (props) => {
+              return  <Profile
+                        handleEditProfile={this.handleEditProfile}
+                        loggedInUser={this.state.loggedInUser}
+                        loggedIn={this.state.loggedIn}
+                      />
+            }} 
+          />
+        </main>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);
