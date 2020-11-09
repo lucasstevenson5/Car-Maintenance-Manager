@@ -7,7 +7,8 @@ const router = express.Router();
 router.get('/new', ctrl.maintenanceItem.newMaintenanceItem)
 router.get('/:index', ctrl.maintenanceItem.showMaintenanceItem);
 router.put('/:index', ctrl.maintenanceItem.editMaintenanceItem);
-router.post('/new', ctrl.maintenanceItem.postMaintenanceItem)
+router.post('/new', ctrl.maintenanceItem.postMaintenanceItem);
+router.delete('/:index', ctrl.maintenanceItem.deleteMaintenanceItem)
 
 
 

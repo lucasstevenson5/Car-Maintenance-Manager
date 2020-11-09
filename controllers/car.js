@@ -9,7 +9,7 @@ const showCar = (req, res) => {
         }]
     })
     .then(carShow => {
-        console.log(carShow.MaintenanceItems[0].carMiles)
+        // console.log(carShow.MaintenanceItems[0].carMiles)
         res.render('car/show.ejs', {
             car: carShow
         })
@@ -38,14 +38,23 @@ const newCar = (req, res) => {
 const postCar = (req, res) => {
     Car.create(req.body)
     .then(carNew => {
-        res.redirect('/users/profile')
+        console.log(carNew)
+        res.redirect(`/car/${carNew.id}`)
     })
 }
 
+const deleteCar = (req, res) => {
+    Car.destroy({
+        where: { id: req.params.index }
+    }).then(() => {
+        res.redirect('/users/profile')
+    })
+}
 
 module.exports = {
     showCar,
     editCar,
     newCar,
-    postCar
+    postCar,
+    deleteCar
 }

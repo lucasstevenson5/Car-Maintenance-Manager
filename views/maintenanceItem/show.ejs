@@ -13,7 +13,11 @@
             Car Mileage: <input type="text" name="carMiles" value="<%= item.carMiles %>" />
             Notes: <input type="text" name="notes" value="<%= item.notes %>" />
             <input type="submit" value="Update Maintenance Item">
-        </form><br><br><br><br>
+        </form><br><br>
+        
+        <form action="/maintenance/<%= item.id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete This Maintenance Entry" />
+        </form><br><br>
 
         <a href="/car/<%= item.carId %>">Back to Car Details</a>
 

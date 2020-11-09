@@ -46,10 +46,22 @@ const postMaintenanceItem = (req, res) => {
     })
 }
 
+const deleteMaintenanceItem = (req, res) => {
+    MaintenanceItem.findByPk(req.params.index)
+    .then(item => {
+        MaintenanceItem.destroy({
+            where: { id: req.params.index }
+        }).then(() => {
+            res.redirect(`/car/${item.carId}`)
+        })
+    })
+    
+}
 
 module.exports = {
     showMaintenanceItem,
     editMaintenanceItem,
     newMaintenanceItem,
-    postMaintenanceItem
+    postMaintenanceItem,
+    deleteMaintenanceItem
 }

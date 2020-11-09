@@ -12,24 +12,30 @@
         <h1>Car Description</h1>
         <p><%= car.year %> <%= car.make %> <%= car.model %></p>
         <img src="<%= car.image %>" alt="picture of your car"/>
-        <form action="/car/<%= car.id %>?_method=PUT" method="POST">
+        <form action="/car?_method=PUT" method="POST">
             Year: <input type="text" name="year" value="<%= car.year %>" />
             Make: <input type="text" name="make" value="<%= car.make %>" />
             Model: <input type="text" name="model" value="<%= car.model %>" />
             Image: <input type="text" name="image" value="<%= car.image %>" />
             <input type="submit" value="Update Car Attributes">
-        </form><br><br><br><br>
+        </form><br><br>
+        
+        <form action="/car/<%= car.id %>?_method=DELETE" method="POST">
+            <input type="submit" value="Delete This Car" />
+        </form><br><br>
 
         <a href="/maintenance/new">Add a Maintenance Item</a>
 
         <% for (let i=0; i < car.MaintenanceItems.length; i++) { %>
-            <li>
-                <a href="/maintenance/<%= car.MaintenanceItems[i].id %>">
-                    <%= car.MaintenanceItems[i].itemDescription %>
-                </a>
-                <p>Car Mileage: <%= car.MaintenanceItems[i].carMiles %></p>
-                <p>Notes: <%= car.MaintenanceItems[i].notes %></p>
-            </li>
+            
+                <li>
+                    <a href="/maintenance/<%= car.MaintenanceItems[i].id %>">
+                        <%= car.MaintenanceItems[i].itemDescription %>
+                    </a>
+                    <p>Car Mileage: <%= car.MaintenanceItems[i].carMiles %></p>
+                    <p>Notes: <%= car.MaintenanceItems[i].notes %></p>
+                </li>
+
         <% } %>
 
         <br><br><br><br><a href="/users/profile">Back to Profile</a>
