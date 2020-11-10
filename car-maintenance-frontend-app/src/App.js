@@ -113,8 +113,11 @@ class App extends Component {
           users.splice(i, 1)
         }
       }
+      let loggedInUser = {};
       this.setState({
-        users: users
+        users: users,
+        loggedIn: false,
+        loggedInUser: loggedInUser
       })
       this.props.history.push('/')
     }
