@@ -5,17 +5,17 @@ const jwt = require('jsonwebtoken');
 const User = require('../models').Users;
 const constants = require('../constants');
 
-const rendSignup = (req,res) => {
-    res.render('auth/signup.ejs', {
-        error: false
-    })
-}
+// const rendSignup = (req,res) => {
+//     res.render('auth/signup.ejs', {
+//         error: false
+//     })
+// }
 
-const rendLogin = (req, res) => {
-    res.render('auth/login.ejs', {
-        error: false
-    })
-}
+// const rendLogin = (req, res) => {
+//     res.render('auth/login.ejs', {
+//         error: false
+//     })
+// }
 
 const signup = (req, res) => {
     User.create(req.body)
@@ -95,8 +95,8 @@ const verifyUser = (req, res) => {
 }
 
 module.exports = {
-    rendSignup,
-    rendLogin,
+    // rendSignup,
+    // rendLogin,
     signup,
     login,
     verifyUser
