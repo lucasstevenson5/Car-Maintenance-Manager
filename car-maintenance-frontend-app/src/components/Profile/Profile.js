@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import EditProfileInfo from './EditProfileInfo';
 import CarGarageContainer from './CarGarageContainer';
+import CarDetails from '../Car/CarDetails';
 
-import { rendProf, updateProf, deleteProf } from '../../services/api_helper';
+import { rendProf, updateProf, deleteProf, postCar } from '../../services/api_helper';
 
 import { Link, Route, withRouter } from 'react-router-dom';
 
@@ -40,6 +41,19 @@ class Profile extends Component {
         this.props.handleVerify();
     }
 
+    addCar = async (e, car) => {
+        e.preventDefault();
+        const userProf = this.state.userProf;
+        const data = await postCar(car);
+        console.log(data);
+        userProf.Cars.push(data);
+        console.log(userProf);
+        this.setState({
+            userProf: userProf
+        })
+        this.props.history.push("/profile/cars")
+    }
+
     componentDidMount() {
         this.props.handleVerify();
         this.rendProfile();
@@ -74,9 +88,18 @@ class Profile extends Component {
                     <Route path="/profile/cars" 
                         render={ (props) => {
                             return  <CarGarageContainer
+                                        addCar={this.addCar}
                                         handleVerify={this.props.handleVerify}
                                         {...this.state}
                                         {...this.props}
+                                    />
+                        }}
+                    />
+                    <Route path="/profile/car/:carDetails" 
+                        render={ (props) => {
+                            return  <CarDetails
+                                        {...props}
+                                        {...this.state}
                                     />
                         }}
                     />

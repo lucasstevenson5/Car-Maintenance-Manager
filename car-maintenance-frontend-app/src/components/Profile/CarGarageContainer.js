@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import CarGarage from './CarGarage';
+import CarGarage from '../Car/CarGarage';
+import NewCarForm from '../Car/NewCarForm';
+import CarDetails from '../Car/CarDetails';
+
 import { Link, Route } from 'react-router-dom';
 
 class CarGarageContainer extends Component {
@@ -14,15 +17,23 @@ class CarGarageContainer extends Component {
     render() {
         return (
             <div>
-                <h3>Your Garage</h3>
+                <h3>Your Garage</h3><br />
                 <nav>
                     <Link to ="/profile/cars/new">Add a car to your garage</Link>
                 </nav>
                 <main>
-                    {/* <Route path="/profile/cars/new" 
+                    <Route exact path="/profile/cars/new" 
                         render={ (props) => {
                             return  <NewCarForm
-                                        {...this.props}
+                                        addCar={this.props.addCar}
+                                        {...props}
+                                    />
+                        }}
+                    />
+                    {/* <Route exact path="/profile/cars/:carDetails" 
+                        render={ (props) => {
+                            return  <CarDetails
+                                        {...props}
                                     />
                         }}
                     /> */}

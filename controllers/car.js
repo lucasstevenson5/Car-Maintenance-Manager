@@ -36,10 +36,16 @@ const newCar = (req, res) => {
 }
 
 const postCar = (req, res) => {
+    req.body.userId = req.user.id
+
     Car.create(req.body)
     .then(carNew => {
-        console.log(carNew)
-        res.redirect(`/car/${carNew.id}`)
+        res.status(constants.SUCCESS).json(carNew)
+        // console.log(carNew)
+        // res.redirect(`/car/${carNew.id}`)
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 

@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 
-class Login extends Component {
+import { Link } from 'react-router-dom';
+
+class NewCarForm extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: "",
-            password: ""
+            year: 0,
+            make: "",
+            model: "",
+            image: ""
+            // userId: 0
         }
     }
 
@@ -19,30 +24,50 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <h1>Log In Page</h1>
-                {this.props.error && <div>{this.props.error}</div>}<br />
-                <form onSubmit={(e) => this.props.handleLogin(e, this.state)}>
-                    Username: <input className="border-solid border-2 border-gray-900"
+                <h1>New Car Form</h1>
+                {this.props.error && <div>{this.props.error}</div>}
+                <form onSubmit={(e) => this.props.addCar(e, this.state)}>
+                    Year: <input className="border-solid border-2 border-gray-900"
                         type="text"
-                        name="username"
-                        placeholder="username"
-                        value={this.state.username}
+                        name="year"
+                        placeholder="model year"
+                        value={this.state.year}
                         onChange={this.updateForm}
-                    /><br /><br />
-                    Password: <input className="border-solid border-2 border-gray-900"
-                        type="password"
-                        name="password"
-                        placeholder="password"
-                        value={this.state.password}
+                    />
+                    Make: <input className="border-solid border-2 border-gray-900"
+                        type="text"
+                        name="make"
+                        placeholder="car manufacturer"
+                        value={this.state.make}
                         onChange={this.updateForm}
-                    /><br /><br />
-                    <input type="submit" value="Login"
+                    />
+                    Model: <input className="border-solid border-2 border-gray-900"
+                        type="text"
+                        name="model"
+                        placeholder="model of car"
+                        value={this.state.model}
+                        onChange={this.updateForm}
+                    />
+                    Image URL: <input className="border-solid border-2 border-gray-900"
+                        type="text"
+                        name="image"
+                        placeholder="url of image of car"
+                        value={this.state.image}
+                        onChange={this.updateForm}
+                    />
+                    {/* <input 
+                        type="hidden"
+                        value={this.props.userProf.id}
+                        onChange={this.updateForm}
+                    /> */}
+                    <input type="submit" value="Add Car to Garage"
                         className="border-solid border-2 border-gray-900"
                     />
                 </form>
+                <Link to="/profile/cars">Hide Form</Link>
             </div>
         )
     }
 }
 
-export default Login;
+export default NewCarForm;

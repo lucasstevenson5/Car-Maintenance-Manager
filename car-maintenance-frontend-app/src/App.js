@@ -59,25 +59,7 @@ class App extends Component {
     this.props.history.push('/')
   }
 
-  // deleteProfile = (e) => {
-  //   e.preventDefault();
-  //   const userResp = prompt("Are you sure you want to delete your profile? This cannot be undone. [y] for yes, any key for no");
-  //   if (userResp === "Y" || userResp == "y") {
-  //     const users = this.state.users
-  //     for (let i = 0; i < users.length; i++) {
-  //       if (users[i].username === this.state.loggedInUser.username) {
-  //         users.splice(i, 1)
-  //       }
-  //     }
-  //     let loggedInUser = {};
-  //     this.setState({
-  //       users: users,
-  //       loggedIn: false,
-  //       loggedInUser: loggedInUser
-  //     })
-  //     this.props.history.push('/')
-  //   }
-  // }
+
 
   componentDidMount() {
     this.handleVerify();
@@ -222,4 +204,24 @@ export default withRouter(App);
   //     loggedInUser: loggedInUser
   //   })
   //   this.props.history.push('/profile')
+  // }  
+  
+  // deleteProfile = (e) => {
+  //   e.preventDefault();
+  //   const userResp = prompt("Are you sure you want to delete your profile? This cannot be undone. [y] for yes, any key for no");
+  //   if (userResp === "Y" || userResp == "y") {
+  //     const users = this.state.users
+  //     for (let i = 0; i < users.length; i++) {
+  //       if (users[i].username === this.state.loggedInUser.username) {
+  //         users.splice(i, 1)
+  //       }
+  //     }
+  //     let loggedInUser = {};
+  //     this.setState({
+  //       users: users,
+  //       loggedIn: false,
+  //       loggedInUser: loggedInUser
+  //     })
+  //     this.props.history.push('/')
+  //   }
   // }
