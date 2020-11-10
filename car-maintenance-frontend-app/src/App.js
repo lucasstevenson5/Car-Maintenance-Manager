@@ -15,7 +15,21 @@ class App extends Component {
       users: [{
         name: "Random User",
         username: "username",
-        password: "password"
+        password: "password",
+        userCars: [
+          {
+            year: 2006,
+            make: "Honda",
+            model: "Accord",
+            image: "https://www.iihs.org/api/ratings/model-year-images/2355"
+          },
+          {
+            year: 2020,
+            make: "Lamborghini",
+            model: "Aventador",
+            image: "https://www.kbb.com/wp-content/uploads/2019/11/05-2020-lamborghini-aventador-svj-roadster-1.jpg"
+          },
+        ]
       }],
       loggedIn: false,
       error: "",
@@ -25,6 +39,7 @@ class App extends Component {
 
   handleSignup = (e, userInfo) => {
     e.preventDefault();
+    userInfo.userCars = [];
     const users = this.state.users;
     const loggedInUser = userInfo
     delete userInfo.passwordConfirm;
@@ -61,6 +76,16 @@ class App extends Component {
     }
   }
 
+  handleLogout = (e) => {
+    e.preventDefault();
+    let loggedInUser = {};
+    this.setState({
+      loggedIn: false,
+      loggedInUser: loggedInUser
+    })
+    this.props.history.push('/')
+  }
+
   handleEditProfile = (e, userInfo) => {
     e.preventDefault();
     const users = this.state.users;
@@ -78,11 +103,34 @@ class App extends Component {
     this.props.history.push('/profile')
   }
 
+  deleteProfile = (e) => {
+    e.preventDefault();
+    const userResp = prompt("Are you sure you want to delete your profile? This cannot be undone. [y] for yes, any key for no");
+    if (userResp === "Y" || userResp == "y") {
+      const users = this.state.users
+      for (let i = 0; i < users.length; i++) {
+        if (users[i].username === this.state.loggedInUser.username) {
+          users.splice(i, 1)
+        }
+      }
+      this.setState({
+        users: users
+      })
+      this.props.history.push('/')
+    }
+  }
+
+  componentDidMount() {
+    if(!this.state.loggedIn) {
+      this.props.history.push('/');
+    }
+  }
+
   render() {
-    console.log(this.state)
+    console.log(this.state.users)
     return (
       <div className="App" >
-        <Header />
+        <Header handleLogout={this.handleLogout} {...this.state} />
         <main>
           <Route exact path="/"
             render={ (props) => {
@@ -109,6 +157,7 @@ class App extends Component {
             render={ (props) => {
               return  <Profile
                         handleEditProfile={this.handleEditProfile}
+                        deleteProfile={this.deleteProfile}
                         loggedInUser={this.state.loggedInUser}
                         loggedIn={this.state.loggedIn}
                       />

@@ -20,22 +20,22 @@ class Login extends Component {
         return (
             <div>
                 <h1>Log In Page</h1>
-                {this.props.error && <div>{this.props.error}</div>}
+                {this.props.error && <div>{this.props.error}</div>}<br />
                 <form onSubmit={(e) => this.props.handleLogin(e, this.state)}>
-                    <input className="border-solid border-2 border-gray-900"
+                    Username: <input className="border-solid border-2 border-gray-900"
                         type="text"
                         name="username"
                         placeholder="username"
                         value={this.state.username}
                         onChange={this.updateForm}
-                    />
-                    <input className="border-solid border-2 border-gray-900"
+                    /><br /><br />
+                    Password: <input className="border-solid border-2 border-gray-900"
                         type="password"
                         name="password"
                         placeholder="password"
                         value={this.state.password}
                         onChange={this.updateForm}
-                    />
+                    /><br /><br />
                     <input type="submit" value="Login"
                         className="border-solid border-2 border-gray-900"
                     />

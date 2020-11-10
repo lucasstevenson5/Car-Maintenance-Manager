@@ -7,8 +7,9 @@ function Header(props) {
             <header>
                 <Link to="/">Car Maintenance Manager</Link>
                 <nav>
-                    <Link to="/signup">Sign Up</Link>
-                    <Link to="/login" className="ml-8">Log In</Link>
+                    {!props.loggedIn && <Link to="/signup">Sign Up</Link>}
+                    {!props.loggedIn && <Link to="/login" className="ml-8">Log In</Link>}
+                    {props.loggedIn && <button onClick={(e) => props.handleLogout(e)}>Logout</button>}
                 </nav>
             </header>
         </div>

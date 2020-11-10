@@ -35,29 +35,29 @@ class Signup extends Component {
         return (
             <div>
                 <h1>Sign Up Page</h1>
-                {this.state.error && <div>{this.state.error}</div>}
+                {this.state.error && <div>{this.state.error}</div>}<br />
                 <form onSubmit={(e) => this.props.handleSignup(e, this.state)}>
-                    <input className="border-solid border-2 border-gray-900"
+                    Full Name: <input className="border-solid border-2 border-gray-900"
                         type="text"
                         name="name"
                         placeholder="Your name... duh"
                         value={this.state.name}
                         onChange={this.updateForm}
-                    />
-                    <input className="border-solid border-2 border-gray-900"
+                    /><br /><br />
+                    Username: <input className="border-solid border-2 border-gray-900"
                         type="text"
                         name="username"
                         placeholder="username"
                         value={this.state.username}
                         onChange={this.updateForm}
-                    />
-                    <input className="border-solid border-2 border-gray-900"
+                    /><br /><br />
+                    Password: <input className="border-solid border-2 border-gray-900"
                         type="password"
                         name="password"
                         placeholder="password"
                         value={this.state.password}
                         onChange={this.updateForm}
-                    />
+                    /><br /><br />
                     {/* <input
                         type="password"
                         name="passwordConfirm"
