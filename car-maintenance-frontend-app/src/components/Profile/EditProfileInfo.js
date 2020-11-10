@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-class Profile extends Component {
+class EditProfileInfo extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            name: this.props.loggedInUser.name,
-            username: this.props.loggedInUser.username,
-            password: this.props.loggedInUser.password
+            name: "",
+            username: "",
+            password: ""
         }
     }
 
@@ -15,6 +15,18 @@ class Profile extends Component {
         this.setState({
             [e.target.name]: e.target.value
         })
+    }
+
+    componentDidMount = async () => {
+        await this.props.handleVerify();
+        if (this.props.currentUser != null) {
+            const name = this.props.currentUser.name;
+            this.setState({
+                name,
+                username: this.props.currentUser.username,
+                password: this.props.currentUser.password
+            })
+        }
     }
 
     render() {
@@ -50,4 +62,4 @@ class Profile extends Component {
     }
 }
 
-export default Profile;
+export default EditProfileInfo;

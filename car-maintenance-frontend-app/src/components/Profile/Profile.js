@@ -44,8 +44,10 @@ class Profile extends Component {
                     <Route path="/profile/edit" 
                         render={ (props) => {
                             return  <EditProfileInfo
-                                        {...this.props} 
+                                        {...this.props}
+                                        {...this.state} 
                                         handleEditProfile={this.props.handleEditProfile} 
+                                        handleVerify={this.props.handleVerify}
                                     />
                         }}
                     />
