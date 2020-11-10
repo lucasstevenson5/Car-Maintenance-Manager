@@ -1,6 +1,7 @@
 const User = require('../models').Users;
 const Car = require('../models').Car;
 
+const constants = require('../constants');
 
 const rendProfile = (req, res) => {
     User.findByPk(req.user.id, {
@@ -9,10 +10,14 @@ const rendProfile = (req, res) => {
         }]
     })
     .then(showProfile => {
-        console.log(showProfile.Cars[0])
-        res.render('users/profile.ejs', {
-            users: showProfile
-        })
+        res.status(constants.SUCCESS).json(showProfile)
+        // console.log(showProfile.Cars[0])
+        // res.render('users/profile.ejs', {
+        //     users: showProfile
+        // })
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 

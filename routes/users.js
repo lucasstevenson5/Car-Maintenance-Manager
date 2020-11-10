@@ -4,9 +4,9 @@ const router = express.Router();
 
 
 
-router.get('/profile', ctrl.users.rendProfile);
-router.put('/profile', ctrl.users.editProfile);
-router.delete('/profile', ctrl.users.deleteProfile)
+router.get('/', ctrl.users.rendProfile);
+router.put('/', ctrl.users.editProfile);
+router.delete('/', ctrl.users.deleteProfile)
 
 
 

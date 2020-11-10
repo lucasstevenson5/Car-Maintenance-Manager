@@ -33,3 +33,12 @@ export const verifyUser = async() => {
     }
     return false;
 }
+
+
+// ================== PROFILE ==================
+
+// goes to http://localhost:3001/profile
+export const rendProf = async (rendData) => {
+    const resp = await api.get("/profile", rendData);
+    return resp.data;
+}
