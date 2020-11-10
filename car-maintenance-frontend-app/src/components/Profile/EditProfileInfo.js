@@ -20,9 +20,8 @@ class EditProfileInfo extends Component {
     componentDidMount = async () => {
         await this.props.handleVerify();
         if (this.props.currentUser != null) {
-            const name = this.props.currentUser.name;
             this.setState({
-                name,
+                name: this.props.currentUser.name,
                 username: this.props.currentUser.username,
                 password: this.props.currentUser.password
             })
@@ -32,7 +31,7 @@ class EditProfileInfo extends Component {
     render() {
         return (
             <div>
-                <br /><form onSubmit={(e) => this.props.handleEditProfile(e, this.state)}>
+                <br /><form onSubmit={(e) => this.props.updateProfile(e, this.state)}>
                         Name: <input className="border-solid border-2 border-gray-900"
                             type="text"
                             name="name"

@@ -26,9 +26,20 @@ const editProfile = (req, res) => {
         where: { id: req.user.id },
         returning: true
     })
-    .then(user => {
-        console.log(user)
-        res.redirect('/users/profile')
+    .then(() => {
+        User.findByPk(req.user.id, {
+            include: [{
+                model: Car,
+            }]
+        })
+        .then(user => {
+        res.status(constants.SUCCESS).json(user)
+            // console.log(user)
+            // res.redirect('/users/profile')
+        })
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 
@@ -36,7 +47,11 @@ const deleteProfile = (req, res) => {
     User.destroy(
         { where: { id: req.user.id } }
     ).then(() => {
-        res.redirect("/");
+        res.status(constants.SUCCESS).send('success')
+        // res.redirect("/");
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 

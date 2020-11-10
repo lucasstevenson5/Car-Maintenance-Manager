@@ -37,8 +37,20 @@ export const verifyUser = async() => {
 
 // ================== PROFILE ==================
 
-// goes to http://localhost:3001/profile
+// goes to http://localhost:3001/profile and gets info from cars and users in database
 export const rendProf = async (rendData) => {
     const resp = await api.get("/profile", rendData);
     return resp.data;
+}
+
+// goest to http://localhost:3001/profile and updates profile info of users in database
+export const updateProf = async (updateData) => {
+    const resp = await api.put("/profile", updateData);
+    return resp.data;
+}
+
+
+export const deleteProf = async () => {
+    await api.delete("/profile");
+    return;
 }

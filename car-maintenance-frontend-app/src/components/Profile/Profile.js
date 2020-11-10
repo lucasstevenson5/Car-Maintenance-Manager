@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import EditProfileInfo from './EditProfileInfo';
 import CarGarageContainer from './CarGarageContainer';
 
-import { rendProf } from '../../services/api_helper';
+import { rendProf, updateProf, deleteProf } from '../../services/api_helper';
 
-import { Link, Route } from 'react-router-dom';
+import { Link, Route, withRouter } from 'react-router-dom';
 
 class Profile extends Component {
     constructor(props) {
@@ -22,12 +22,31 @@ class Profile extends Component {
         })
     }
 
+    updateProfile = async (e, registerData) => {
+        e.preventDefault();
+        let userProf = await updateProf(registerData);
+        console.log(userProf);
+        this.setState({
+            userProf: userProf
+        })
+    }
+
+    deleteProfile = async (e) => {
+        e.preventDefault();
+        await deleteProf();
+        this.setState({
+            userProf: null
+        })
+        this.props.handleVerify();
+    }
+
     componentDidMount() {
         this.props.handleVerify();
         this.rendProfile();
     }
 
     render() {
+        console.log(this.state)
         return (
             <div>
                 {this.props.currentUser ? 
@@ -46,7 +65,8 @@ class Profile extends Component {
                             return  <EditProfileInfo
                                         {...this.props}
                                         {...this.state} 
-                                        handleEditProfile={this.props.handleEditProfile} 
+                                        updateProfile={this.updateProfile} 
+                                        deleteProfile={this.deleteProfile}
                                         handleVerify={this.props.handleVerify}
                                     />
                         }}
@@ -67,4 +87,4 @@ class Profile extends Component {
     
 }
 
-export default Profile;
+export default withRouter(Profile);

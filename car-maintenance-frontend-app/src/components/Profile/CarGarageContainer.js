@@ -7,8 +7,8 @@ class CarGarageContainer extends Component {
         super(props);
     }
 
-    componentDidMount() {
-        this.props.handleVerify();
+    componentDidMount = async () => {
+        await this.props.handleVerify();
     }
 
     render() {

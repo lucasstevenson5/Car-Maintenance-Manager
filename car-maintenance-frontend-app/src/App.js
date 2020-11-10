@@ -15,28 +15,7 @@ class App extends Component {
 
     this.state = {
       currentUser: null
-      // users: [{
-      //   name: "Random User",
-      //   username: "username",
-      //   password: "password",
-      //   userCars: [
-      //     {
-      //       year: 2006,
-      //       make: "Honda",
-      //       model: "Accord",
-      //       image: "https://www.iihs.org/api/ratings/model-year-images/2355"
-      //     },
-      //     {
-      //       year: 2020,
-      //       make: "Lamborghini",
-      //       model: "Aventador",
-      //       image: "https://www.kbb.com/wp-content/uploads/2019/11/05-2020-lamborghini-aventador-svj-roadster-1.jpg"
-      //     },
-      //   ]
-      // }],
-      // loggedIn: false,
-      // error: "",
-      // loggedInUser: {}
+      
     }
   }
 
@@ -46,6 +25,7 @@ class App extends Component {
     this.setState({
       currentUser: currentUser
     })
+    this.props.history.push('/profile');
   }
 
   handleLogin = async (e, registerData) => {
@@ -64,6 +44,9 @@ class App extends Component {
         currentUser: currentUser
       })
     } else {
+      this.setState({
+        currentUser: null
+      })
       this.props.history.push('/')
     }
   }
@@ -75,23 +58,6 @@ class App extends Component {
     })
     this.props.history.push('/')
   }
-
-  // handleEditProfile = (e, userInfo) => {
-  //   e.preventDefault();
-  //   const users = this.state.users;
-  //   let loggedInUser = this.state.loggedInUser;
-  //   for(let i = 0; i < users.length; i++) {
-  //     if(users[i].username === loggedInUser.username && users[i].password === loggedInUser.password) {
-  //       users[i] = userInfo
-  //       loggedInUser = userInfo
-  //     }
-  //   }
-  //   this.setState({
-  //     users: users,
-  //     loggedInUser: loggedInUser
-  //   })
-  //   this.props.history.push('/profile')
-  // }
 
   // deleteProfile = (e) => {
   //   e.preventDefault();
@@ -162,6 +128,30 @@ class App extends Component {
 
 export default withRouter(App);
 
+// users: [{
+      //   name: "Random User",
+      //   username: "username",
+      //   password: "password",
+      //   userCars: [
+      //     {
+      //       year: 2006,
+      //       make: "Honda",
+      //       model: "Accord",
+      //       image: "https://www.iihs.org/api/ratings/model-year-images/2355"
+      //     },
+      //     {
+      //       year: 2020,
+      //       make: "Lamborghini",
+      //       model: "Aventador",
+      //       image: "https://www.kbb.com/wp-content/uploads/2019/11/05-2020-lamborghini-aventador-svj-roadster-1.jpg"
+      //     },
+      //   ]
+      // }],
+      // loggedIn: false,
+      // error: "",
+      // loggedInUser: {}
+
+
   // handleSignup = (e, userInfo) => {
   //   e.preventDefault();
   //   userInfo.userCars = [];
@@ -215,4 +205,21 @@ export default withRouter(App);
   //   if(!this.state.loggedIn) {
   //     this.props.history.push('/');
   //   }
+  // }  
+  
+  // handleEditProfile = (e, userInfo) => {
+  //   e.preventDefault();
+  //   const users = this.state.users;
+  //   let loggedInUser = this.state.loggedInUser;
+  //   for(let i = 0; i < users.length; i++) {
+  //     if(users[i].username === loggedInUser.username && users[i].password === loggedInUser.password) {
+  //       users[i] = userInfo
+  //       loggedInUser = userInfo
+  //     }
+  //   }
+  //   this.setState({
+  //     users: users,
+  //     loggedInUser: loggedInUser
+  //   })
+  //   this.props.history.push('/profile')
   // }
