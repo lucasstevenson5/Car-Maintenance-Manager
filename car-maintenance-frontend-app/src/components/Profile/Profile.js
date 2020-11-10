@@ -13,10 +13,19 @@ class Profile extends Component {
         }
     }
 
+    componentDidMount() {
+        this.props.handleVerify();
+    }
+
     render() {
+        console.log(this.props)
         return (
             <div>
-                <h1>Welcome {this.props.loggedInUser.name}</h1><br />
+                {this.props.currentUser ? 
+                <h1>Welcome {this.props.currentUser.name}</h1>
+                :
+                <h1>Welcome</h1>
+                }
                 <nav>
                     <Link to="/profile/edit">Edit Profile Info</Link>
                     <Link to="/profile/cars" className="ml-8">Your Garage</Link>

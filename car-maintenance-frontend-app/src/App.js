@@ -54,6 +54,7 @@ class App extends Component {
     this.setState({
       currentUser: currentUser
     })
+    this.props.history.push('/profile');
   }
 
   handleVerify = async () => {
@@ -62,6 +63,8 @@ class App extends Component {
       this.setState({
         currentUser: currentUser
       })
+    } else {
+      this.props.history.push('/')
     }
   }
 
@@ -146,8 +149,8 @@ class App extends Component {
               return  <Profile
                         handleEditProfile={this.handleEditProfile}
                         deleteProfile={this.deleteProfile}
-                        loggedInUser={this.state.loggedInUser}
-                        loggedIn={this.state.loggedIn}
+                        handleVerify={this.handleVerify}
+                        {...this.state}
                       />
             }} 
           />
