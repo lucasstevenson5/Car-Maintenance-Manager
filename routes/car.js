@@ -4,7 +4,7 @@ const router = express.Router();
 
 
 
-router.get('/new', ctrl.car.newCar);
+// router.get('/new', ctrl.car.newCar);
 router.get('/:index', ctrl.car.showCar);
 router.put('/:index', ctrl.car.editCar);
 router.post('/new', ctrl.car.postCar);

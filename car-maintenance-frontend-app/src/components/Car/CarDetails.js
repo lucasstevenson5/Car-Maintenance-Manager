@@ -77,7 +77,8 @@ class CarDetails extends Component {
                     <input type="submit" value="Edit Car"
                         className="border-solid border-2 border-gray-900"
                     />
-                </form>
+                </form><br /><br />
+                <button onClick={(e) => this.props.deleteACar(e, parseInt(this.props.match.params.carDetails))}>Delete this car from your garage</button>
             </div>
         ) 
     }

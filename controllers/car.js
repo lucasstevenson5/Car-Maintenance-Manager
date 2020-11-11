@@ -18,17 +18,11 @@ const showCar = (req, res) => {
 }
 
 const editCar = (req, res) => {
-    console.log(req.params.index)
-    console.log(parseInt(req.params.index))
-    console.log(req.body)
     Car.update(req.body, {
         where: { id: parseInt(req.params.index) },
         returning: true,
     })
     .then(updateCar => {
-        console.log("==========================")
-        console.log(updateCar);
-        console.log("==========================")
         Car.findByPk(parseInt(req.params.index))
         .then(foundCar => {
 
@@ -44,15 +38,15 @@ const editCar = (req, res) => {
     })
 }
 
-const newCar = (req, res) => {
-    User.findByPk(req.user.id)
-    .then(userDetails => {
-        console.log(userDetails)
-        res.render('car/new.ejs', {
-            users: userDetails
-        })
-    })
-}
+// const newCar = (req, res) => {
+//     User.findByPk(req.user.id)
+//     .then(userDetails => {
+//         console.log(userDetails)
+//         res.render('car/new.ejs', {
+//             users: userDetails
+//         })
+//     })
+// }
 
 const postCar = (req, res) => {
     req.body.userId = req.user.id
@@ -69,17 +63,28 @@ const postCar = (req, res) => {
 }
 
 const deleteCar = (req, res) => {
-    Car.destroy({
-        where: { id: req.params.index }
-    }).then(() => {
-        res.redirect('/users/profile')
+    Car.findByPk(req.params.index)
+    .then(foundCar => {
+        if(foundCar.userId === req.user.id) {
+            Car.destroy({
+                where: {id: req.params.index}
+            })
+            .then(() => {
+                res.status(constants.SUCCESS).send('success')
+            })
+        } else {
+            res.status(constants.FORBIDDEN).send("ERROR: You are trying to delete someone else's car. If error persists, submit issue ticket")
+        }
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 
 module.exports = {
     showCar,
     editCar,
-    newCar,
+    // newCar,
     postCar,
     deleteCar
 }

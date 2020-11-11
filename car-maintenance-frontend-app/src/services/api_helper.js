@@ -69,3 +69,9 @@ export const updateCar = async (index, updateData) => {
     const resp = await api.put(`/car/${index}`, updateData);
     return resp.data;
 }
+
+
+export const deleteCar = async (index) => {
+    await api.delete(`/car/${index}`);
+    return;
+}
