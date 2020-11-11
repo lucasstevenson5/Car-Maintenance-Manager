@@ -34,11 +34,14 @@ class Profile extends Component {
 
     deleteProfile = async (e) => {
         e.preventDefault();
-        await deleteProf();
-        this.setState({
-            userProf: null
-        })
-        this.props.handleVerify();
+        const userResp = prompt("Are you sure you want to delete your profile? This cannot be undone. [y] for yes, any key for no");
+        if (userResp === "Y" || userResp == "y") {
+            await deleteProf();
+            this.setState({
+                userProf: null
+            })
+            this.props.handleVerify();
+        }
     }
 
     addCar = async (e, car) => {
@@ -65,9 +68,12 @@ class Profile extends Component {
 
     deleteACar = async (e, id) => {
         e.preventDefault();
-        await deleteCar(id);
-        this.props.history.push("/profile/cars")
-        this.rendProfile();
+        const userResp = prompt("Are you sure you want to delete your profile? This cannot be undone. [y] for yes, any key for no");
+        if (userResp === "Y" || userResp == "y") {
+            await deleteCar(id);
+            this.props.history.push("/profile/cars")
+            this.rendProfile();
+        }
     }
 
     componentDidMount() {
