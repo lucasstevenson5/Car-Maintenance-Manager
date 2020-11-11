@@ -22,11 +22,13 @@ const rendProfile = (req, res) => {
 }
 
 const editProfile = (req, res) => {
+    console.log(req.body)
     User.update(req.body, {
         where: { id: req.user.id },
         returning: true
     })
-    .then(() => {
+    .then((data) => {
+        console.log(data)
         User.findByPk(req.user.id, {
             include: [{
                 model: Car,

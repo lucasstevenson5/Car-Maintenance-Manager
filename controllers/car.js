@@ -1,6 +1,7 @@
 const Car = require('../models').Car;
 const User = require('../models').Users;
 const MaintenanceItem = require('../models').MaintenanceItem;
+const constants = require('../constants');
 
 const showCar = (req, res) => {
     Car.findByPk(req.params.index, {
@@ -17,11 +18,29 @@ const showCar = (req, res) => {
 }
 
 const editCar = (req, res) => {
+    console.log(req.params.index)
+    console.log(parseInt(req.params.index))
+    console.log(req.body)
     Car.update(req.body, {
-        where: { id: req.params.index },
+        where: { id: parseInt(req.params.index) },
         returning: true,
-    }).then(updateCar => {
-        res.redirect(`/car/${req.params.index}`)
+    })
+    .then(updateCar => {
+        console.log("==========================")
+        console.log(updateCar);
+        console.log("==========================")
+        Car.findByPk(parseInt(req.params.index))
+        .then(foundCar => {
+
+            console.log(foundCar)
+            res.status(constants.SUCCESS).json(foundCar)
+        })
+        .catch(err => {
+            res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
+        })
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 

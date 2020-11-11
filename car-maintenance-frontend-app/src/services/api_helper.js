@@ -63,3 +63,9 @@ export const postCar = async (addData) => {
     const resp = await api.post("/car/new", addData);
     return resp.data;
 }
+
+// goes to http://localhost:3001/car/:index and edits the car based on the index which is tied to the id of the car
+export const updateCar = async (index, updateData) => {
+    const resp = await api.put(`/car/${index}`, updateData);
+    return resp.data;
+}

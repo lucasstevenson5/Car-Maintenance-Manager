@@ -11,7 +11,7 @@ class CarGarage extends Component {
     render() {
         return (
             <div>
-                <Link to={"/profile/car/" + this.props.car.year + this.props.car.make + this.props.car.model}>
+                <Link to={"/profile/car/" + this.props.car.id}>
                     View Details
                 </Link>
                 <br /><h4>{this.props.car.year} {this.props.car.make} {this.props.car.model}</h4>

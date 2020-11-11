@@ -3,7 +3,7 @@ import EditProfileInfo from './EditProfileInfo';
 import CarGarageContainer from './CarGarageContainer';
 import CarDetails from '../Car/CarDetails';
 
-import { rendProf, updateProf, deleteProf, postCar } from '../../services/api_helper';
+import { rendProf, updateProf, deleteProf, postCar, updateCar } from '../../services/api_helper';
 
 import { Link, Route, withRouter } from 'react-router-dom';
 
@@ -54,6 +54,13 @@ class Profile extends Component {
         this.props.history.push("/profile/cars")
     }
 
+    editCar = async (e, id, car) => {
+        console.log(car)
+        e.preventDefault();
+        const data = await updateCar(id, car);
+        console.log(data)
+    }
+
     componentDidMount() {
         this.props.handleVerify();
         this.rendProfile();
@@ -98,6 +105,7 @@ class Profile extends Component {
                     <Route path="/profile/car/:carDetails" 
                         render={ (props) => {
                             return  <CarDetails
+                                        editCar={this.editCar}
                                         {...props}
                                         {...this.state}
                                     />
