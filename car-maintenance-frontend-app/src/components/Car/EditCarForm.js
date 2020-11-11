@@ -20,7 +20,7 @@ class CarDetails extends Component {
         })
     }
 
-    updateState = () => {
+    componentDidMount = async () => {
         if (this.props.userCar != null) {
             this.setState({
                 year: this.props.userCar.year,
@@ -29,10 +29,6 @@ class CarDetails extends Component {
                 image: this.props.userCar.image
             }) 
         }
-    }
-
-    componentDidMount = async () => {
-        this.updateState();
     }
 
     render() {

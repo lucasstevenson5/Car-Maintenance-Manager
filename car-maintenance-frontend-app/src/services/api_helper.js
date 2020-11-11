@@ -91,3 +91,21 @@ export const postMaintenance = async (addData) => {
     const resp = await api.post("/maintenance/new", addData);
     return resp.data;
 }
+
+
+export const rendMaintenance = async (index, rendData) => {
+    const resp = await api.get(`/maintenance/${index}`, rendData);
+    return resp.data;
+}
+
+
+export const updateMaintenance = async (index, updateData) => {
+    const resp = await api.put(`/maintenance/${index}`, updateData);
+    return resp.data;
+}
+
+
+export const deleteMaintenance = async (index) => {
+    await api.delete(`/maintenance/${index}`);
+    return;
+}

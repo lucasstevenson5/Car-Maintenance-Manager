@@ -26,7 +26,6 @@ const editCar = (req, res) => {
     .then(updateCar => {
         Car.findByPk(parseInt(req.params.index))
         .then(foundCar => {
-
             console.log(foundCar)
             res.status(constants.SUCCESS).json(foundCar)
         })

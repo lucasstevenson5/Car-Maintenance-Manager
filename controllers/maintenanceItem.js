@@ -6,9 +6,12 @@ const constants = require('../constants');
 const showMaintenanceItem = (req, res) => {
     MaintenanceItem.findByPk(req.params.index)
     .then(item => {
-        res.render('maintenanceItem/show.ejs', {
-            item: item
-        })
+        res.status(constants.SUCCESS).json(item)
+        // res.render('maintenanceItem/show.ejs', {
+        //     item: item   
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 
@@ -17,27 +20,38 @@ const editMaintenanceItem = (req, res) => {
         where: { id: req.params.index },
         returning: true,
     }).then(updateItem => {
-        res.redirect(`/maintenance/${req.params.index}`)
+        // res.redirect(`/maintenance/${req.params.index}`)
+        MaintenanceItem.findByPk(parseInt(req.params.index))
+        .then(foundItem => {
+            console.log(foundItem);
+            res.status(constants.SUCCESS).json(foundItem);
+        })
+        .catch(err => {
+            res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
+        })
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 
-const newMaintenanceItem = (req, res) => {
-    User.findByPk(req.user.id)
-    .then(userDetails => {
-        console.log(userDetails)
-        Car.findAll({
-            where: { userId: userDetails.id },
-            order: [
-                ['id', 'ASC']
-            ]
-        }).then(car => {
-            console.log(car)
-            res.render('maintenanceItem/new.ejs', {
-                car: car
-            })
-        })
-    })
-}
+// const newMaintenanceItem = (req, res) => {
+//     User.findByPk(req.user.id)
+//     .then(userDetails => {
+//         console.log(userDetails)
+//         Car.findAll({
+//             where: { userId: userDetails.id },
+//             order: [
+//                 ['id', 'ASC']
+//             ]
+//         }).then(car => {
+//             console.log(car)
+//             res.render('maintenanceItem/new.ejs', {
+//                 car: car
+//             })
+//         })
+//     })
+// }
 
 const postMaintenanceItem = (req, res) => {
     // req.body.carId = req.params.index
@@ -60,16 +74,19 @@ const deleteMaintenanceItem = (req, res) => {
         MaintenanceItem.destroy({
             where: { id: req.params.index }
         }).then(() => {
-            res.redirect(`/car/${item.carId}`)
+            res.status(constants.SUCCESS).send('success')
+            // res.redirect(`/car/${item.carId}`)
         })
     })
-    
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
+    })
 }
 
 module.exports = {
     showMaintenanceItem,
     editMaintenanceItem,
-    newMaintenanceItem,
+    // newMaintenanceItem,
     postMaintenanceItem,
     deleteMaintenanceItem
 }

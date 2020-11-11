@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import EditCarForm from './EditCarForm';
 import MaintenanceContainer from '../MaintenanceItems/MaintenanceContainer';
+import MaintenanceDetails from '../MaintenanceItems/MaintenanceDetails';
+import EditMaintenanceItem from '../MaintenanceItems/EditMaintenanceItem';
 
-import { rendCar, postMaintenance } from '../../services/api_helper';
+import { rendCar, postMaintenance, updateMaintenance } from '../../services/api_helper';
 
 import { Link, Route } from 'react-router-dom';
 
@@ -33,6 +35,14 @@ class CarDetails extends Component {
         console.log(data);
     }
 
+    // editMaintenanceItem = async (e, index, item) => {
+    //     e.preventDefault();
+    //     const data = await updateMaintenance(index, item);
+    //     console.log(data)
+    //     this.props.history.push(`/profile/car/${this.props.match.params.carDetails}/maintenanceItem/${index}`)
+    //     this.rendSingleCar();
+    // }
+
     componentDidMount() {
         this.props.handleVerify();
         this.rendSingleCar();
@@ -49,7 +59,7 @@ class CarDetails extends Component {
                 <nav>
                     <Link to={"/profile/car/" + this.props.match.params.carDetails + "/edit"}>Edit Car</Link>
                     <Link to={"/profile/car/" + this.props.match.params.carDetails + "/maintenance"} className="ml-8">View Maintenance List</Link>
-                </nav>
+                </nav><br />
 
                 <main>
                     <Route path="/profile/car/:carDetails/edit" 
@@ -74,6 +84,29 @@ class CarDetails extends Component {
                                     />
                         }}
                     />
+                    <Route path="/profile/car/:carDetails/maintenanceItem/:maintenanceDetails" 
+                        render={ (props) => {
+                            return  <MaintenanceDetails
+                                        // editMaintenanceItem={this.editMaintenanceItem}
+                                        handleVerify={this.props.handleVerify}
+                                        userProf={this.props.userProf}
+                                        carId={this.props.match.params.carDetails}
+                                        {...props}
+                                        {...this.state}
+                                    />
+                        }}
+                    />
+                    {/* <Route path="/profile/car/:carDetails/maintenanceItem/:maintenanceDetails/edit" 
+                        render={ (props) => {
+                            return  <EditMaintenanceItem
+                                        handleVerify={this.props.handleVerify}
+                                        userProf={this.props.userProf}
+                                        carId={this.props.match.params.carDetails}
+                                        {...props}
+                                        {...this.state}
+                                    />
+                        }}
+                    /> */}
                 </main>
             </div>
         ) 

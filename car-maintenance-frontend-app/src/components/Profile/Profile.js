@@ -90,7 +90,7 @@ class Profile extends Component {
                 <nav>
                     <Link to="/profile/edit">Edit Profile Info</Link>
                     <Link to="/profile/cars" className="ml-8">Your Garage</Link>
-                </nav>
+                </nav><br />
                 <main>
 
                     <Route path="/profile/edit" 
