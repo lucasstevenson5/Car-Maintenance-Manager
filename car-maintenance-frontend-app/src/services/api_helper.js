@@ -70,7 +70,7 @@ export const updateCar = async (index, updateData) => {
     return resp.data;
 }
 
-
+// goes to http://localhost:3001/car/:index and deletes a car from the car model in the database tied to that user's id
 export const deleteCar = async (index) => {
     await api.delete(`/car/${index}`);
     return;
@@ -79,5 +79,15 @@ export const deleteCar = async (index) => {
 // goes to http://localhost:3001/dar/:index and gets info from cars and users in database
 export const rendCar = async (index, rendData) => {
     const resp = await api.get(`/car/${index}`, rendData);
+    return resp.data;
+}
+
+
+// ================== MAINTENANCE ==================
+
+// goes to http://localhost:3001/maintenance/new and adds a new maintenance item and ties it to that car's id
+export const postMaintenance = async (addData) => {
+    console.log(addData)
+    const resp = await api.post("/maintenance/new", addData);
     return resp.data;
 }

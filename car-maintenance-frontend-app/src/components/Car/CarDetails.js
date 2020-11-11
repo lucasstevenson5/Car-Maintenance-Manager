@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import EditCarForm from './EditCarForm';
 import MaintenanceContainer from '../MaintenanceItems/MaintenanceContainer';
 
-import { rendCar } from '../../services/api_helper';
+import { rendCar, postMaintenance } from '../../services/api_helper';
 
 import { Link, Route } from 'react-router-dom';
 
@@ -23,13 +23,22 @@ class CarDetails extends Component {
         })
     }
 
+    addMaintenanceItem = async (e, index, item) => {
+        e.preventDefault();
+        console.log("in here")
+        console.log(index)
+        item.carId = parseInt(index);
+        console.log(item)
+        const data = await postMaintenance(item);
+        console.log(data);
+    }
+
     componentDidMount() {
         this.props.handleVerify();
         this.rendSingleCar();
     }
 
     render() {
-        console.log(this.state)
         return (
             <div>
                 <h1>Car Details</h1>
@@ -57,7 +66,9 @@ class CarDetails extends Component {
                     <Route path="/profile/car/:carDetails/maintenance" 
                         render={ (props) => {
                             return  <MaintenanceContainer
+                                        addMaintenanceItem={this.addMaintenanceItem}
                                         userProf={this.props.userProf}
+                                        carId={this.props.match.params.carDetails}
                                         {...props}
                                         {...this.state}
                                     />

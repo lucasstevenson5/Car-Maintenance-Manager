@@ -1,7 +1,8 @@
 import React from 'react';
 
+
+
 function MaintenanceList(props) {
-    console.log(props)
     return (
         <div>
             Type of Maintenance: {props.maintenanceItem.itemDescription}<br />

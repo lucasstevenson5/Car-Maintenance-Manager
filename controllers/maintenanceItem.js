@@ -1,6 +1,7 @@
 const MaintenanceItem = require('../models').MaintenanceItem;
 const Car = require('../models').Car;
 const User = require('../models').Users;
+const constants = require('../constants');
 
 const showMaintenanceItem = (req, res) => {
     MaintenanceItem.findByPk(req.params.index)
@@ -39,10 +40,17 @@ const newMaintenanceItem = (req, res) => {
 }
 
 const postMaintenanceItem = (req, res) => {
+    // req.body.carId = req.params.index
+    console.log(req.body)
+
     MaintenanceItem.create(req.body)
     .then(item => {
-        console.log(item)
-        res.redirect(`/car/${item.carId}`)
+        res.status(constants.SUCCESS).json(item)
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
+        // console.log(item)
+        // res.redirect(`/car/${item.carId}`)
     })
 }
 
