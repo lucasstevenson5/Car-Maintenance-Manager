@@ -75,3 +75,9 @@ export const deleteCar = async (index) => {
     await api.delete(`/car/${index}`);
     return;
 }
+
+// goes to http://localhost:3001/dar/:index and gets info from cars and users in database
+export const rendCar = async (index, rendData) => {
+    const resp = await api.get(`/car/${index}`, rendData);
+    return resp.data;
+}

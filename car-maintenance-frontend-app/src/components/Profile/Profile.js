@@ -58,10 +58,8 @@ class Profile extends Component {
     }
 
     editCar = async (e, id, car) => {
-        console.log(car)
         e.preventDefault();
         const data = await updateCar(id, car);
-        console.log(data)
         this.props.history.push("/profile/cars")
         this.rendProfile();
     }
@@ -82,7 +80,6 @@ class Profile extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <div>
                 {this.props.currentUser ? 
@@ -120,6 +117,7 @@ class Profile extends Component {
                     <Route path="/profile/car/:carDetails" 
                         render={ (props) => {
                             return  <CarDetails
+                                        handleVerify={this.props.handleVerify}
                                         deleteACar={this.deleteACar}
                                         editCar={this.editCar}
                                         {...props}

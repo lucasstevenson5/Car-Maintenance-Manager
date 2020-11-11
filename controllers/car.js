@@ -11,9 +11,10 @@ const showCar = (req, res) => {
     })
     .then(carShow => {
         // console.log(carShow.MaintenanceItems[0].carMiles)
-        res.render('car/show.ejs', {
-            car: carShow
-        })
+        res.status(constants.SUCCESS).json(carShow)
+    })
+    .catch(err => {
+        res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
 

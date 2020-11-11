@@ -20,21 +20,22 @@ class CarDetails extends Component {
         })
     }
 
+    updateState = () => {
+        if (this.props.userCar != null) {
+            this.setState({
+                year: this.props.userCar.year,
+                make: this.props.userCar.make,
+                model: this.props.userCar.model,
+                image: this.props.userCar.image
+            }) 
+        }
+    }
+
     componentDidMount = async () => {
-        const currentCar = this.props.userProf.Cars.find(car =>
-            car.id === parseInt(this.props.match.params.carDetails)
-        );
-        console.log(currentCar)
-        this.setState({
-            year: currentCar.year,
-            make: currentCar.make,
-            model: currentCar.model,
-            image: currentCar.image
-        })
+        this.updateState();
     }
 
     render() {
-        console.log(this.props)
         return (
             <div>
                 <Link to={"/profile/car/" + this.props.match.params.carDetails}>Hide Form</Link>
