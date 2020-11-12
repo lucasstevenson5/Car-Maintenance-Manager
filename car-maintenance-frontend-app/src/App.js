@@ -68,7 +68,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="bg-cerulean" >
+      <div className="bg-naples" >
         <Header handleLogout={this.handleLogout} {...this.state} />
         <main>
           <Route exact path="/"
