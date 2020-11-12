@@ -83,11 +83,11 @@ class Profile extends Component {
         return (
             <div>
                 {this.props.currentUser ? 
-                <h1>Welcome {this.props.currentUser.name}</h1>
+                <h1 className="text-center">Welcome {this.props.currentUser.name}</h1>
                 :
-                <h1>Welcome</h1>
+                <h1 className="text-center">Welcome</h1>
                 }
-                <nav>
+                <nav className="text-center mt-4">
                     <Link to="/profile/edit">Edit Profile Info</Link>
                     <Link to="/profile/cars" className="ml-8">Your Garage</Link>
                 </nav><br />

@@ -50,9 +50,11 @@ const editCar = (req, res) => {
 
 const postCar = (req, res) => {
     req.body.userId = req.user.id
+    console.log(req.body)
 
     Car.create(req.body)
     .then(carNew => {
+        console.log(carNew)
         res.status(constants.SUCCESS).json(carNew)
         // console.log(carNew)
         // res.redirect(`/car/${carNew.id}`)

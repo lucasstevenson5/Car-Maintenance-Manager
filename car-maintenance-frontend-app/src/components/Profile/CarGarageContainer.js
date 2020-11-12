@@ -16,10 +16,10 @@ class CarGarageContainer extends Component {
 
     render() {
         return (
-            <div>
-                <h3>Your Garage</h3><br />
-                <nav>
-                    <Link to ="/profile/cars/new">Add a car to your garage</Link>
+            <div className="bg-gray-500">
+                <h3 className="text-center">Your Garage</h3><br />
+                <nav className="text-center">
+                    <Link to="/profile/cars/new" className="text-center hover:text-gray-200 hover:underline">Add a car to your garage</Link>
                 </nav>
                 <main>
                     <Route exact path="/profile/cars/new" 

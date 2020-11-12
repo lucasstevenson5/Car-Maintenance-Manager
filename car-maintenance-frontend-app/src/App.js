@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 import Header from './components/Home/Header';
 import Homepage from './components/Home/Homepage';
 import Login from './components/Login-Signup/Login';
@@ -67,7 +68,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App" >
+      <div className="bg-cerulean" >
         <Header handleLogout={this.handleLogout} {...this.state} />
         <main>
           <Route exact path="/"
