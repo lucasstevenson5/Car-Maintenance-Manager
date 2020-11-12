@@ -63,9 +63,9 @@ app.use('/profile', verifyToken, routes.users);
 app.use('/car', verifyToken, routes.car);
 app.use('/maintenance', verifyToken, routes.maintenanceItem)
 
-app.get('/', (req, res) => {
-    res.render('users/home.ejs')
-});
+// app.get('/', (req, res) => {
+//     res.render('users/home.ejs')
+// });
 
 //listen used to run app on port 3000, listen function from express library
 app.listen(process.env.PORT, () => {
