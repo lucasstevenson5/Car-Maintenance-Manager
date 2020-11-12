@@ -26,7 +26,7 @@ const corsOptions = {
 //     next();
 // });
 
-app.use(cors(corsOptions))
+app.use(cors(corsOptions, { credentials: true, origin: true }))
 app.use(bodyParser.json());
 
 //whatever inside this every request passed through it
