@@ -38,7 +38,7 @@ const signup = (req, res) => {
         res.cookie('jwt', token);
         res.redirect(`/users/profile`);
     })
-    .catch(() => {
+    .catch((err) => {
         res.status(constants.BAD_REQUEST).send(`ERROR: ${err}`);
         // res.render('auth/signup.ejs', {
         //     error: true
