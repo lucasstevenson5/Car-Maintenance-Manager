@@ -55,6 +55,7 @@ const login = (req, res) => {
         }, 
     })
     .then(foundUser => {
+        console.log(foundUser)
         if(foundUser) {
             const token = jwt.sign(
                 {
