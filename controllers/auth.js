@@ -39,6 +39,7 @@ const signup = (req, res) => {
         res.redirect(`/users/profile`);
     })
     .catch((err) => {
+        console.log(err)
         res.status(constants.BAD_REQUEST).send(`ERROR: ${err}`);
         // res.render('auth/signup.ejs', {
         //     error: true
