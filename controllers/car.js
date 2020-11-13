@@ -49,7 +49,7 @@ const editCar = (req, res) => {
 // }
 
 const postCar = (req, res) => {
-    req.body.userId = req.user.id
+    req.body.user_id = req.user.id
     console.log(req.body)
 
     Car.create(req.body)
