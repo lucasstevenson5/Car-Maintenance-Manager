@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('MaintenanceItems', 
-    'carId', 
+    'car_id', 
     { 
       type: Sequelize.INTEGER 
     });

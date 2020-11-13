@@ -8,23 +8,23 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      itemDescription: {
+      item_description: {
         allowNull: false,
         type: Sequelize.STRING
       },
-      carMiles: {
+      car_miles: {
         allowNull: false,
         type: Sequelize.INTEGER
       },
       notes: {
         type: Sequelize.STRING
       },
-      createdAt: {
+      created_at: {
         allowNull: false,
         defaultValue: new Date(),
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         defaultValue: new Date(),
         type: Sequelize.DATE

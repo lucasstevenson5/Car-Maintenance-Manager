@@ -5,22 +5,22 @@ module.exports = {
     await queryInterface.bulkInsert("MaintenanceItems",
       [
         {
-          itemDescription: "Oil Change",
-          carMiles: 5200,
+          item_description: "Oil Change",
+          car_miles: 5200,
           notes: "Synthetic Oil",
-          carId: 5
+          car_id: 5
         },
         {
-          itemDescription: "Tire Change",
-          carMiles: 134529,
+          item_description: "Tire Change",
+          car_miles: 134529,
           notes: "Discount Tire",
-          carId: 1
+          car_id: 1
         },
         {
-          itemDescription: "Coolant Flush",
-          carMiles: 134552,
+          item_description: "Coolant Flush",
+          car_miles: 134552,
           notes: "hasgadgets",
-          carId: 1
+          car_id: 1
         },
       ],
       {}
