@@ -80,7 +80,8 @@ const login = (req, res) => {
             // })
         }
     })
-    .catch(err => {
+    .catch((err) => {
+        console.log(err)
         res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
@@ -90,7 +91,8 @@ const verifyUser = (req, res) => {
     .then(foundUser => {
         res.status(constants.SUCCESS).json(foundUser);
     })
-    .catch(err => {
+    .catch((err) => {
+        console.log(err)
         res.status(constants.INTERNAL_SERVER_ERROR).send
     })
 }
