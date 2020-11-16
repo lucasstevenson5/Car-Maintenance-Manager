@@ -7,7 +7,10 @@ const rendProfile = (req, res) => {
     User.findByPk(req.user.id, {
         include: [{
             model: Car,
-        }]
+        }],
+        order: [
+            [{model: Car}, 'year', 'DESC']
+        ]
     })
     .then(showProfile => {
         res.status(constants.SUCCESS).json(showProfile)
@@ -22,7 +25,6 @@ const rendProfile = (req, res) => {
 }
 
 const editProfile = (req, res) => {
-    console.log(req.body)
     User.update(req.body, {
         where: { id: req.user.id },
         returning: true

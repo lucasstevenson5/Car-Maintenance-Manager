@@ -7,11 +7,14 @@ const showCar = (req, res) => {
     Car.findByPk(req.params.index, {
         include: [{
             model: MaintenanceItem
-            
         },
         {
             model: MaintenanceSchedule
-        }]
+        }],
+        order: [
+            [{model: MaintenanceItem}, 'carMiles', 'DESC'],
+            [{model: MaintenanceSchedule}, 'itemDescription', 'ASC']
+        ]
     })
     .then(carShow => {
         res.status(constants.SUCCESS).json(carShow)
