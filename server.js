@@ -13,7 +13,7 @@ const methodOverride = require('method-override'); //gets method-override librar
 const cookieParser = require('cookie-parser');
 
 const corsOptions = {
-    origin: ['https://car-maintenance-app.surge.sh'],
+    origin: ['https://uptight-system.surge.sh'],
     methods: "GET,POST,PUT,DELETE",
     credentials: true, //allows session cookies to be sent back and forth
     optionsSuccessStatus: 200 //legacy browsers
