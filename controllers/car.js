@@ -17,6 +17,7 @@ const showCar = (req, res) => {
         ]
     })
     .then(carShow => {
+        console.log(carShow)
         res.status(constants.SUCCESS).json(carShow)
     })
     .catch(err => {
