@@ -13,7 +13,7 @@ const methodOverride = require('method-override'); //gets method-override librar
 const cookieParser = require('cookie-parser');
 
 const corsOptions = {
-    origin: ['https://car-maintenance-app.surge.sh'],
+    origin: ['http://localhost:3000'],
     methods: "GET,POST,PUT,DELETE",
     credentials: true, //allows session cookies to be sent back and forth
     optionsSuccessStatus: 200 //legacy browsers
@@ -68,7 +68,8 @@ app.use('/auth', routes.auth);
 app.use('/auth/verify', verifyToken, routes.auth);
 app.use('/profile', verifyToken, routes.users);
 app.use('/car', verifyToken, routes.car);
-app.use('/maintenance', verifyToken, routes.maintenanceItem)
+app.use('/maintenance', verifyToken, routes.maintenanceItem);
+app.use('/schedule', verifyToken, routes.maintenanceSchedule);
 
 // app.get('/', (req, res) => {
 //     res.render('users/home.ejs')

@@ -1,16 +1,19 @@
 const Car = require('../models').Car;
-const User = require('../models').Users;
+const MaintenanceSchedule = require('../models').MaintenanceSchedule;
 const MaintenanceItem = require('../models').MaintenanceItem;
 const constants = require('../constants');
 
 const showCar = (req, res) => {
     Car.findByPk(req.params.index, {
         include: [{
-            model: MaintenanceItem,
+            model: MaintenanceItem
+            
+        },
+        {
+            model: MaintenanceSchedule
         }]
     })
     .then(carShow => {
-        // console.log(carShow.MaintenanceItems[0].carMiles)
         res.status(constants.SUCCESS).json(carShow)
     })
     .catch(err => {
@@ -38,16 +41,6 @@ const editCar = (req, res) => {
     })
 }
 
-// const newCar = (req, res) => {
-//     User.findByPk(req.user.id)
-//     .then(userDetails => {
-//         console.log(userDetails)
-//         res.render('car/new.ejs', {
-//             users: userDetails
-//         })
-//     })
-// }
-
 const postCar = (req, res) => {
     req.body.userId = req.user.id
     console.log(req.body)
@@ -56,8 +49,6 @@ const postCar = (req, res) => {
     .then(carNew => {
         console.log(carNew)
         res.status(constants.SUCCESS).json(carNew)
-        // console.log(carNew)
-        // res.redirect(`/car/${carNew.id}`)
     })
     .catch(err => {
         res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
@@ -86,7 +77,6 @@ const deleteCar = (req, res) => {
 module.exports = {
     showCar,
     editCar,
-    // newCar,
     postCar,
     deleteCar
 }
