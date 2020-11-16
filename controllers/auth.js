@@ -6,6 +6,7 @@ const User = require('../models').Users;
 const constants = require('../constants');
 
 const signup = (req, res) => {
+    console.log("Here ===============================")
     bcrypt.genSalt(10, (err, salt) => {
         if(err){
             res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
