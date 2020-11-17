@@ -59,8 +59,8 @@
 ![Flowchart](planning/FlowchartCarMaintenanceApp.png)
 
 11. Wireframe:
-![Wireframe1](planning/Wireframe1.png)
-![Wireframe2](planning/Wireframe2.png)
+    1. ![Wireframe1](planning/Wireframe1.png)
+    1. ![Wireframe2](planning/Wireframe2.png)
 
 12. ERD:
 ![ERD](planning/ERDCarMaintenanceApp.png)
