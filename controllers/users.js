@@ -14,10 +14,6 @@ const rendProfile = (req, res) => {
     })
     .then(showProfile => {
         res.status(constants.SUCCESS).json(showProfile)
-        // console.log(showProfile.Cars[0])
-        // res.render('users/profile.ejs', {
-        //     users: showProfile
-        // })
     })
     .catch(err => {
         res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
@@ -30,7 +26,6 @@ const editProfile = (req, res) => {
         returning: true
     })
     .then((data) => {
-        console.log(data)
         User.findByPk(req.user.id, {
             include: [{
                 model: Car,
@@ -38,8 +33,6 @@ const editProfile = (req, res) => {
         })
         .then(user => {
         res.status(constants.SUCCESS).json(user)
-            // console.log(user)
-            // res.redirect('/users/profile')
         })
     })
     .catch(err => {
@@ -52,7 +45,6 @@ const deleteProfile = (req, res) => {
         { where: { id: req.user.id } }
     ).then(() => {
         res.status(constants.SUCCESS).send('success')
-        // res.redirect("/");
     })
     .catch(err => {
         res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);

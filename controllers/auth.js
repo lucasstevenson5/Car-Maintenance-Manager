@@ -6,7 +6,6 @@ const User = require('../models').Users;
 const constants = require('../constants');
 
 const signup = (req, res) => {
-    console.log("Here ===============================")
     bcrypt.genSalt(10, (err, salt) => {
         if(err){
             res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
@@ -33,13 +32,9 @@ const signup = (req, res) => {
                     "token" : token,
                     "user": newUser
                 });
-
-                // res.cookie('jwt', token);
-                // res.redirect(`/profile`);
             })
-            .catch((err) => {
-                console.log(err)
-                res.status(constants.BAD_REQUEST).send(`ERROR: ${err}`);
+            .catch(err => {
+                res.status(constants.BAD_REQUEST).json({"error": err});
             })
         })
     })
@@ -55,7 +50,6 @@ const login = (req, res) => {
         if(foundUser) {
             bcrypt.compare(req.body.password, foundUser.password, (err, match) => {
                 if(match){
-                    console.log(match)
                     const token = jwt.sign(
                         {
                             id: foundUser.id,
@@ -70,9 +64,6 @@ const login = (req, res) => {
                         "token" : token,
                         "user": foundUser
                     });
-                    
-                    // res.cookie('jwt', token);
-                    // res.redirect(`/profile`);
                 } else {
                     res.status(constants.BAD_REQUEST).send(`ERROR: Incorrect Username/Password`);
                 }
@@ -93,14 +84,11 @@ const verifyUser = (req, res) => {
         res.status(constants.SUCCESS).json(foundUser);
     })
     .catch((err) => {
-        console.log(err)
         res.status(constants.INTERNAL_SERVER_ERROR).send
     })
 }
 
 module.exports = {
-    // rendSignup,
-    // rendLogin,
     signup,
     login,
     verifyUser

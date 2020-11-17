@@ -17,11 +17,9 @@ const showCar = (req, res) => {
         ]
     })
     .then(carShow => {
-        console.log(carShow)
         res.status(constants.SUCCESS).json(carShow)
     })
     .catch(err => {
-        console.log(err)
         res.status(constants.INTERNAL_SERVER_ERROR).send(`ERROR: ${err}`);
     })
 }
@@ -34,7 +32,6 @@ const editCar = (req, res) => {
     .then(updateCar => {
         Car.findByPk(parseInt(req.params.index))
         .then(foundCar => {
-            console.log(foundCar)
             res.status(constants.SUCCESS).json(foundCar)
         })
         .catch(err => {
@@ -48,11 +45,9 @@ const editCar = (req, res) => {
 
 const postCar = (req, res) => {
     req.body.userId = req.user.id
-    console.log(req.body)
 
     Car.create(req.body)
     .then(carNew => {
-        console.log(carNew)
         res.status(constants.SUCCESS).json(carNew)
     })
     .catch(err => {

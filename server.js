@@ -19,18 +19,9 @@ const corsOptions = {
     optionsSuccessStatus: 200 //legacy browsers
 }
 
-// app.use(function(req, res, next) {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
-//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-//     next();
-// });
-
 app.use(cors(corsOptions))
 app.use(bodyParser.json());
 
-//whatever inside this every request passed through it
-//makes it so express can understand it 
 //Middleware
 app.use(express.urlencoded({extended: true})); //changes response from client to JS understandable 
 app.use(methodOverride('_method'));
@@ -44,8 +35,6 @@ app.use(cookieParser());
 
 const verifyToken = (req,res, next) => {
     let token = req.headers['authorization'];
-    // let token = req.cookies.jwt
-    // console.log(`Token: ${token}`)
 
     if(token){
         token = token.substring(constants.BEARER_START_INDEX) //remove string Bearer from the token
@@ -55,9 +44,6 @@ const verifyToken = (req,res, next) => {
         if(err || !decodedUser){
             return res.status(constants.UNAUTHORIZED).send(`ERROR: ${err}`);
         }
-        // if(err || !decodedUser) {
-        //     return res.send('Errorin JWT');
-        // }
         req.user = decodedUser;
 
         next()
@@ -71,11 +57,6 @@ app.use('/car', verifyToken, routes.car);
 app.use('/maintenance', verifyToken, routes.maintenanceItem);
 app.use('/schedule', verifyToken, routes.maintenanceSchedule);
 
-// app.get('/', (req, res) => {
-//     res.render('users/home.ejs')
-// });
-
-//listen used to run app on port 3000, listen function from express library
 app.listen(process.env.PORT, () => {
     console.log(`I am listening on port ${process.env.PORT}`);
 })
